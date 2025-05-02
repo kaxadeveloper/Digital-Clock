@@ -7,11 +7,17 @@ function clock() {
     let h = new Date().getHours();
     let m = new Date().getMinutes();
     let s = new Date().getSeconds();
-    var am = 'AM';
+    let am = 'AM';
 
-    if(h > 12) {
-        h = h -12;
-        var am = 'PM';
+    if (h >= 12) {
+        am = 'PM';
+        if (h > 12) {
+            h = h - 12;
+        }
+    }
+
+    if (h === 0) {
+        h = 12; // midnight case
     }
 
     h = (h < 10) ? '0' + h : h;
@@ -22,6 +28,8 @@ function clock() {
     minutes.innerHTML = m;
     seconds.innerHTML = s;
     ampm.innerHTML = am;
-};
 
-let interval = setInterval(clock, 1000);
+    setTimeout(clock, 1000);
+}
+
+clock();
